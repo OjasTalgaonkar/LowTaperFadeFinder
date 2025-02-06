@@ -12,4 +12,4 @@ Currently supported on windows , mac, linux and unix systems
 
 Future improvements- Making the program multi threaded so that it searches faster
 
-![alt text](image.png)
+![alt text](.assets/taperFade.png)
