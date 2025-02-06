@@ -19,6 +19,8 @@ FileType getFileType(const std::string &filename);
 // Function to search for specific words in a file
 void search(const std::string &inputFile);
 
+bool checker();
+
 }  // namespace searcher
 
 #endif  // SEARCHER_H

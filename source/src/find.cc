@@ -32,26 +32,19 @@ void search(const std::string &inputFile) {
         return;
     }
 
-    std::map<std::string, bool> wordMap = {
-        {"low", false},
-        {"taper", false},
-        {"fade", false},
-        {"massive", false},
-    };
-
     std::string line, word;
     while (std::getline(file, line)) {
         for (char c : line) {
             if (c == ' ') {
                 if (word == "low" || word == "Low") {
                     wordMap["low"] = true;
-                    std::cout << "Found: low\n";
+                    std::cout << "Found low in " << inputFile << "\n";
                 } else if (word == "taper" || word == "Taper") {
                     wordMap["taper"] = true;
-                    std::cout << "Found: taper\n";
+                    std::cout << "Found taper in " << inputFile << "\n";
                 } else if (word == "fade" || word == "Fade") {
                     wordMap["fade"] = true;
-                    std::cout << "Found: fade\n";
+                    std::cout << "Found fade in " << inputFile << "\n";
                 } else if (word == "massive" || word == "Massive") {
                     wordMap["massive"] = true;
                 }
@@ -74,15 +67,21 @@ void search(const std::string &inputFile) {
         }
     }
 
-    if (wordMap["low"] && wordMap["taper"] && wordMap["fade"]) {
-        std::cout << "All conditions met. You are officially a massive brainrot enjoyer, "
-                     "but you know what else is massive?\n";
-        std::cout << "LLLLLLLLOOOOOOOOWWWWWW  T A P E R  F A D E\n";
-    } else if (wordMap["massive"]) {
+    if (wordMap["massive"]) {
         std::cout << "Low taper fade wasn't found, but we did find massive, "
                      "and you know what else is massive?\n";
         std::cout << "LLLLLLLLOOOOOOOOWWWWWW  T A P E R  F A D E\n";
     }
+}
+
+bool checker() {
+    if (wordMap["low"] && wordMap["taper"] && wordMap["fade"]) {
+        std::cout << "All conditions met. You are officially a massive brainrot enjoyer, "
+                     "but you know what else is massive?\n";
+        std::cout << "LLLLLLLLOOOOOOOOWWWWWW  T A P E R  F A D E\n";
+        return true;
+    }
+    return false;
 }
 
 }  // namespace searcher

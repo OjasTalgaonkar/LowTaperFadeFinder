@@ -22,7 +22,14 @@ int main() {
                  root, fs::directory_options::skip_permission_denied)) {
             std::string        filePath = entry.path().string();
             searcher::FileType type     = searcher::getFileType(filePath);
-            searcher::search(filePath);
+            if (type == searcher::FileType::TEXT) {
+                searcher::search(filePath);
+                if (searcher::checker() == true) {
+                    std::cout << "merry rizzmas";
+                    break;
+                }
+            }
+            // std::cout << entry.path().string() << " ";
         }
     } catch (const std::exception &e) { std::cerr << "Error: " << e.what() << std::endl; }
 }
