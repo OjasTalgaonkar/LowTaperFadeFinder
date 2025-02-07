@@ -68,6 +68,7 @@ void search(const std::string &inputFile) {
     }
 
     if (wordMap["massive"]) {
+        wordMap["massive"] = false;
         std::cout << "Low taper fade wasn't found, but we did find massive, "
                      "and you know what else is massive?\n";
         std::cout << "LLLLLLLLOOOOOOOOWWWWWW  T A P E R  F A D E\n";
