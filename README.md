@@ -6,10 +6,13 @@ To run this on your machine
 
 1. Clone the repo
 2. Run this in the repo's root directory
-   `./compile.sh`
+   For single threaded search
+   `./run.sh`
+   For multi threaded search
+   `./run.sh multi`
 
 Currently supported on windows , mac, linux and unix systems
 
-Future improvements- Making the program multi threaded so that it searches faster
+Future improvements- Possibly making a GUI?
 
 ![alt text](.assets/taperFade.png)
