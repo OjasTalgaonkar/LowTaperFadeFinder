@@ -1,16 +1,20 @@
-#include <cmath>
+#include <atomic>
 #include <filesystem>
 #include <iostream>
 
 #include "../include/searcher.hh"
 #include "../include/threadPool.hh"
 
-namespace fs = std::filesystem;
+namespace fs                  = std::filesystem;
+std::atomic<bool> foundTarget = false;  // Global flag to stop work
 
 int processFile(const fs::path &filePath, ThreadPool &pool) {
     try {
-        if (!fs::exists(filePath))
-            return 0;  // Stop early if found
+        if (!fs::exists(filePath) || foundTarget)
+            return 0;
+
+        // std::cout << "Processing: " << filePath << std::endl;
+
         std::string        pathString = filePath.string();
         searcher::FileType type       = searcher::getFileType(pathString);
 
@@ -18,13 +22,16 @@ int processFile(const fs::path &filePath, ThreadPool &pool) {
             searcher::search(pathString);
             if (searcher::checker()) {
                 std::cout << "merry rizzmas\n";
-                pool.stopPool();  // Stop the thread pool immediately
+                foundTarget = true;
+                pool.stopPool();
                 return 5;
             }
         }
     } catch (const std::exception &e) {
         std::cerr << "Error processing " << filePath.string() << ": " << e.what() << std::endl;
     }
+
+    // std::cout << "Finished: " << filePath << std::endl;
     return 0;
 }
 
@@ -40,7 +47,7 @@ int main() {
     return 1;
 #endif
 
-    ThreadPool pool(std::pow(std::thread::hardware_concurrency(), 2));
+    ThreadPool pool(std::thread::hardware_concurrency());
 
     fs::recursive_directory_iterator it(root, fs::directory_options::skip_permission_denied), end;
     while (it != end) {
@@ -55,7 +62,7 @@ int main() {
                 continue;
             }
 
-            if (searcher::checker())
+            if (foundTarget)
                 break;  // Stop adding tasks if condition met
 
             pool.enqueue([currentPath, &pool] { processFile(currentPath, pool); });
@@ -64,6 +71,10 @@ int main() {
             std::cerr << "Skipping " << it->path().string() << ": " << e.what() << std::endl;
         }
         ++it;
+    }
+
+    while (pool.activeTasks > 0) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 
     return 0;
