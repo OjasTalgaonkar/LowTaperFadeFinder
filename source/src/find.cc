@@ -28,8 +28,8 @@ FileType getFileType(const std::string &filename) {
 void search(const std::string &inputFile) {
     std::ifstream file(inputFile);
     if (!file.is_open()) {
-        std::cerr << "Failed to open input file: " << inputFile << std::endl;
-        return;
+        // std::cerr << "Failed to open input file: " << inputFile << std::endl;
+        // return;
     }
 
     std::string line, word;
@@ -80,6 +80,9 @@ bool checker() {
         std::cout << "All conditions met. You are officially a massive brainrot enjoyer, "
                      "but you know what else is massive?\n";
         std::cout << "LLLLLLLLOOOOOOOOWWWWWW  T A P E R  F A D E\n";
+        wordMap["low"] = wordMap["taper"] = wordMap["fade"] = false;
+        std::exit(0);
+
         return true;
     }
     return false;
