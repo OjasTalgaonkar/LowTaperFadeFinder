@@ -75,7 +75,7 @@ void search(const std::string &inputFile) {
     }
 }
 
-bool checker() {
+bool checker(std::string inputfile) {
     if (wordMap["low"] && wordMap["taper"] && wordMap["fade"]) {
         std::cout << "All conditions met. You are officially a massive brainrot enjoyer, "
                      "but you know what else is massive?\n";

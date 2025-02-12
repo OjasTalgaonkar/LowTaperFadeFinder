@@ -41,7 +41,7 @@ int main() {
                 searcher::FileType type     = searcher::getFileType(filePath);
                 if (type == searcher::FileType::TEXT) {
                     searcher::search(filePath);
-                    if (searcher::checker()) {
+                    if (searcher::checker(filePath)) {
                         std::cout << "merry rizzmas";
                         break;
                     }

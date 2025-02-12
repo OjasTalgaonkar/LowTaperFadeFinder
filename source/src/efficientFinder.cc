@@ -20,7 +20,7 @@ int processFile(const fs::path &filePath, ThreadPool &pool) {
 
         if (type == searcher::FileType::TEXT) {
             searcher::search(pathString);
-            if (searcher::checker()) {
+            if (searcher::checker(pathString)) {
                 std::cout << "merry rizzmas\n";
                 foundTarget = true;
                 pool.stopPool();
@@ -28,7 +28,7 @@ int processFile(const fs::path &filePath, ThreadPool &pool) {
             }
         }
     } catch (const std::exception &e) {
-        std::cerr << "Error processing " << filePath.string() << ": " << e.what() << std::endl;
+        std::cerr << "Error processing " << filePath.string() << ": " << e.what() << "\n";
     }
 
     // std::cout << "Finished: " << filePath << std::endl;
@@ -43,7 +43,7 @@ int main() {
 #elif __APPLE__ || __linux__ || __unix__
     root = "/";
 #else
-    std::cerr << "Unsupported OS" << std::endl;
+    std::cerr << "Unsupported OS" << "\n";
     return 1;
 #endif
 
@@ -68,7 +68,7 @@ int main() {
             pool.enqueue([currentPath, &pool] { processFile(currentPath, pool); });
 
         } catch (const std::exception &e) {
-            std::cerr << "Skipping " << it->path().string() << ": " << e.what() << std::endl;
+            std::cerr << "Skipping " << it->path().string() << ": " << e.what() << "\n";
         }
         ++it;
     }
