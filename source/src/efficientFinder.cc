@@ -35,6 +35,15 @@ int processFile(const fs::path &filePath, ThreadPool &pool) {
     return 0;
 }
 
+ThreadPool *globalPool = nullptr;
+
+// void cleanup() {
+//     if (globalPool) {
+//         globalPool->stopPool();
+//         std::cout << "thread cleared";
+//     }
+// }
+
 int main() {
     std::string root;
 
@@ -48,6 +57,8 @@ int main() {
 #endif
 
     ThreadPool pool(std::thread::hardware_concurrency());
+    globalPool = &pool;  // Store reference to pool
+    // std::atexit(cleanup);  // Register cleanup() function
 
     fs::recursive_directory_iterator it(root, fs::directory_options::skip_permission_denied), end;
     while (it != end) {

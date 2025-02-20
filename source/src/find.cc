@@ -82,7 +82,6 @@ bool checker(std::string inputfile) {
         std::cout << "LLLLLLLLOOOOOOOOWWWWWW  T A P E R  F A D E\n";
         wordMap["low"] = wordMap["taper"] = wordMap["fade"] = false;
         std::exit(0);
-
         return true;
     }
     return false;

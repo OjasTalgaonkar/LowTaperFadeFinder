@@ -1,6 +1,7 @@
 #include "../include/threadPool.hh"
 
 #include <cstddef>
+#include <cstdlib>
 #include <functional>
 #include <mutex>
 
@@ -10,7 +11,12 @@ ThreadPool::ThreadPool(size_t threadCount) {
     }
 }
 
-ThreadPool::~ThreadPool() { stopPool(); }
+ThreadPool::~ThreadPool() {
+    std::cout << "hello";
+    stopPool();
+}
+
+std::atexit(stopPool);
 
 void ThreadPool::stopPool() {
     stop = true;
