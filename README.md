@@ -1,6 +1,6 @@
 # The LOW TAPER FADE Finder
 
-Looks through your whole machine for the words low , taper and fade
+Runs a multi-threaded and high performance search on your whole machine for the words low , taper and fade
 
 To run this on your machine
 
