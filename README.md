@@ -5,11 +5,11 @@ Looks through your whole machine for the words low , taper and fade
 To run this on your machine
 
 1. Clone the repo
-2. Run this in the repo's root directory
-   For single threaded search
-   `./run.sh`
-   For multi threaded search
-   `./run.sh multi`
+2. Run this in the repo's root directory <br>
+   For single threaded search 
+   `./run.sh` <br>
+   For multi threaded search 
+   `./run.sh multi` <br>
 
 Currently supported on windows , mac, linux and unix systems
 
